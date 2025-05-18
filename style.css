@@ -126,11 +126,11 @@ header {
 }
 
 .servico {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border-radius: 8px;
   overflow: hidden;
   width: 300px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
 }
 
 .servico img {
@@ -192,4 +192,288 @@ footer {
   color: white;
   text-align: center;
   padding: 1rem 0;
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal.mostrar {
+  display: flex;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 90%;
+  position: relative;
+  animation: zoomIn 0.3s ease forwards;
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 2rem;
+  color: #000;
+  cursor: pointer;
+}
+
+/* Adicione isso na seção de animações */
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* Atualize estas regras */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.modal.mostrar {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Rolagem suave para todo o documento */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Estilo opcional para links ativos */
+.menu li a.active {
+    color: #00a859;
+    position: relative;
+}
+
+.menu li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #00a859;
+    animation: underlineGrow 0.3s ease-out;
+}
+
+@keyframes underlineGrow {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+
+/* Transição suave para todas as âncoras */
+a {
+    transition: color 0.3s ease;
+}
+
+/* Efeito visual nos links do menu */
+.menu li a:hover {
+    color: #00a859;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Estilos da Galeria */
+.gallery-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 15px;
+  padding: 10px 0;
+  margin: 0 -2rem;
+  width: calc(100% + 4rem);
+}
+
+.gallery-item {
+  scroll-snap-align: center;
+  min-width: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain;
+  display: block;
+}
+
+.image-marker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: white;
+  padding: 20px 15px 10px;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.gallery-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.gallery-indicators .indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.gallery-indicators .indicator.active {
+  background: #00a859;
+  transform: scale(1.2);
+}
+
+/* Adicione isso para melhorar o scroll */
+.gallery-container::-webkit-scrollbar {
+  height: 5px;
+}
+
+.gallery-container::-webkit-scrollbar-thumb {
+  background: #00a859;
+  border-radius: 10px;
+}
+
+.gallery-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Estilo da galeria */
+.gallery-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.gallery-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.gallery-item.reversed {
+  flex-direction: row-reverse;
+}
+
+.image-container {
+  position: relative;
+  flex: 1;
+  min-height: 250px;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.image-marker {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #00a859;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.text-container {
+  flex: 1;
+  padding: 20px;
+}
+
+.text-container h3 {
+  color: #00a859;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.text-container p {
+  color: #555;
+  line-height: 1.5;
+}
+.image-container {
+  aspect-ratio: 1/1;
 }
