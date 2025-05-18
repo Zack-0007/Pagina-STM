@@ -1,76 +1,94 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Elementos do modal
   const modal = document.getElementById('modal');
-  const modalTitle = document.getElementById('modal-title');
+  const modalContent = modal.querySelector('.modal-content');
+  const closeBtn = modal.querySelector('.close');
   const modalGallery = document.getElementById('modal-gallery');
-  const closeBtn = document.querySelector('.close');
-
-  // Dados dos serviços (edite conforme necessário)
+  
+  // Dados dos serviços
   const servicos = {
     "Iluminação": [
       {
         src: "works/luces.jpg",
-        title: "Design Moderno",
-        description: "Sistema de iluminação LED com controle inteligente"
+        title: "Projeto Personalizado",
+        description: "Sistema de iluminação LED com design moderno e controle inteligente"
       },
       {
         src: "works/extra1.jpg",
-        title: "Instalação",
-        description: "Profissionais certificados garantindo qualidade"
+        title: "Instalação Profissional",
+        description: "Técnicos especializados garantindo perfeito funcionamento"
       }
     ],
     "Eletrica": [
       {
         src: "works/Panel_electrico.jpg",
         title: "Painel Elétrico",
-        description: "Instalação de quadros de distribuição modernos"
+        description: "Instalação profissional de quadros de distribuição"
       }
-    ]
+    ],
+    // Adicione outros serviços conforme necessário
   };
 
-  // Abrir modal ao clicar nas imagens
+  // Abrir modal
   document.querySelectorAll('.servico img').forEach(img => {
     img.addEventListener('click', function(e) {
+      // Calcula a posição do clique
+      const rect = this.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+      
+      // Define a origem da animação
+      modalContent.style.transformOrigin = `${clickX}px ${clickY}px`;
+      
+      // Preenche o conteúdo do modal
       const servico = this.closest('.servico');
       const titulo = servico.querySelector('h3').textContent;
+      document.getElementById('modal-title').textContent = titulo;
       
-      modalTitle.textContent = titulo;
+      // Limpa a galeria anterior
       modalGallery.innerHTML = '';
-
+      
+      // Adiciona os itens da galeria
       if (servicos[titulo]) {
         servicos[titulo].forEach((item, index) => {
-          const itemDiv = document.createElement('div');
-          itemDiv.className = `gallery-item ${index % 2 === 0 ? '' : 'reversed'}`;
-          itemDiv.innerHTML = `
-            <div class="image-container">
+          const galleryItem = document.createElement('div');
+          galleryItem.className = `gallery-item ${index % 2 === 0 ? '' : 'reversed'}`;
+          
+          galleryItem.innerHTML = `
+            <div class="gallery-image">
               <img src="${item.src}" alt="${item.title}">
               <div class="image-marker">${index + 1}</div>
             </div>
-            <div class="text-container">
+            <div class="gallery-text">
               <h3>${item.title}</h3>
               <p>${item.description}</p>
             </div>
           `;
-          modalGallery.appendChild(itemDiv);
+          
+          modalGallery.appendChild(galleryItem);
         });
       }
-
+      
+      // Mostra o modal
       modal.classList.add("mostrar");
       document.body.style.overflow = 'hidden';
     });
   });
 
   // Fechar modal
-  closeBtn.addEventListener('click', function() {
-    modal.classList.remove("mostrar");
-    document.body.style.overflow = 'auto';
-  });
+  function closeModal() {
+    modal.classList.add("saindo");
+    setTimeout(() => {
+      modal.classList.remove("mostrar", "saindo");
+      document.body.style.overflow = 'auto';
+    }, 300);
+  }
 
-  // Fechar ao clicar fora do conteúdo
+  // Event listeners para fechar
+  closeBtn.addEventListener('click', closeModal);
+  
   modal.addEventListener('click', function(e) {
     if (e.target === modal) {
-      modal.classList.remove("mostrar");
-      document.body.style.overflow = 'auto';
+      closeModal();
     }
   });
 });
