@@ -477,3 +477,26 @@ a {
 .image-container {
   aspect-ratio: 1/1;
 }
+
+/* Cursor pointer para elementos clicáveis */
+.servico img, 
+.close, 
+.menu li a, 
+.banner-content .btn, 
+.icones-contato a,
+.gallery-item img {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Efeito de hover opcional */
+.servico img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.close:hover {
+  color: #00a859;
+}
+
+/* Se já existirem regras para esses elementos, adicione apenas o cursor:pointer */
